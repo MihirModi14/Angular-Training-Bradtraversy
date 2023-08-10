@@ -1,0 +1,11 @@
+<app-post-form (newPost)="onNewPost($event)" (updatedPost)="onUpdatePost($event)" [currentPost]="currentPost"
+    [isEdit]="isEdit"></app-post-form>
+<div class="card mb-3" *ngFor="let post of posts">
+    <div class="card-body">
+        <h3><a routerLink="/posts/{{ post.id }}">{{ post.title }}</a></h3>
+        <p>{{ post.body }}</p>
+    </div>
+    <hr>
+    <button type="button" (click)="removePost(post)" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+    <button type="button" (click)="editPost(post)" class="btn btn-light"><i class="fa fa-pencil"></i></button>
+</div>

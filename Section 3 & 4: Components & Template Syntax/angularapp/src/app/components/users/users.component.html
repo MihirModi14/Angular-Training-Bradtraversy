@@ -1,0 +1,41 @@
+<p>users works!</p>
+<div class="container card card-body">
+    <button [disabled]="!enableAdd" type="button" class="btn btn-light btn-block mb-3" [ngClass]="currentClasses">Add
+        User</button>
+    <ul class="list-group" *ngIf="loaded && users.length > 0">
+        <li class="row mb-3" *ngFor="let user of users" [class.bg-light]="user?.isActive"
+            [style.background-color]="!user?.isActive ? 'blue' : ''">
+            <div class="col-sm-2">
+                <img [src]="user.image">
+                <!-- <img src="{{ user.image }}">
+                <img bind-src="user.image"> -->
+            </div>
+            <div class="col-sm-8" [ngStyle]="currentStyle">
+                {{ user.firstName }} {{ user.lastName }}
+                <p *ngIf="showExtended && showAge && user.age">Age : {{ user.age }}</p>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        Balance: {{ user.balance | currency:'INR':'symbol' }}<br>
+                        Balance: {{ user.balance | currency:'GBP':'code' }}
+                    </li>
+                    <li class="list-group-item">
+                        Joined: {{ user.registered | date:"shortDate" }}<br>
+                        Joined: {{ user.registered | date:"longDate" }}<br>
+                        Joined: {{ user.registered | date:"dd/mm/yyyy" }}<br>
+                        Joined: {{ user.registered | date:"shortTime" }}<br>
+                    </li>
+                    <li class="list-group-item">
+                        {{ 5 | number: "2.2" | currency}} is {{ 0.47 | percent }}
+                    </li>
+                    <li class="list-group-item" ngNonBindable>
+                        {{ 5 | number: "2.2"}}
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <!-- <ng-template #noUsers>No User Found...</ng-template> -->
+    <ul *ngIf="users?.length === 0">No User Found...</ul>
+    <ul *ngIf="!loaded">Loading users...</ul>
+</div>
